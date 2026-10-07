@@ -1,0 +1,13 @@
+module InvoiceXpress.Types.GlobalDiscountRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.Common
+data GlobalDiscountRequest
+instance Show GlobalDiscountRequest
+instance Eq GlobalDiscountRequest
+instance Data.Aeson.FromJSON GlobalDiscountRequest
+instance Data.Aeson.ToJSON GlobalDiscountRequest
+data GlobalDiscountRequestValueType
+instance Show GlobalDiscountRequestValueType
+instance Eq GlobalDiscountRequestValueType
+instance Data.Aeson.FromJSON GlobalDiscountRequestValueType
+instance Data.Aeson.ToJSON GlobalDiscountRequestValueType

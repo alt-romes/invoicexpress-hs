@@ -1,0 +1,23 @@
+module InvoiceXpress.Types.ClientsListAll where
+import qualified Data.Aeson
+import qualified InvoiceXpress.Common
+data ClientsListAll
+instance Show ClientsListAll
+instance Eq ClientsListAll
+instance Data.Aeson.FromJSON ClientsListAll
+instance Data.Aeson.ToJSON ClientsListAll
+data ClientsListAllClients
+instance Show ClientsListAllClients
+instance Eq ClientsListAllClients
+instance Data.Aeson.FromJSON ClientsListAllClients
+instance Data.Aeson.ToJSON ClientsListAllClients
+data ClientsListAllClientsPreferredContact
+instance Show ClientsListAllClientsPreferredContact
+instance Eq ClientsListAllClientsPreferredContact
+instance Data.Aeson.FromJSON ClientsListAllClientsPreferredContact
+instance Data.Aeson.ToJSON ClientsListAllClientsPreferredContact
+data ClientsListAllPagination
+instance Show ClientsListAllPagination
+instance Eq ClientsListAllPagination
+instance Data.Aeson.FromJSON ClientsListAllPagination
+instance Data.Aeson.ToJSON ClientsListAllPagination

@@ -1,0 +1,80 @@
+cabal-version: 1.12
+
+name:           invoicexpress
+version:        0.1.0.0
+build-type:     Simple
+
+library
+  exposed-modules:
+      InvoiceXpress
+      InvoiceXpress.Operations.GeneratePdf
+      InvoiceXpress.Operations.ListClients
+      InvoiceXpress.Operations.CreateClient
+      InvoiceXpress.Operations.FindClientByCode
+      InvoiceXpress.Operations.GetClient
+      InvoiceXpress.Operations.UpdateClient
+      InvoiceXpress.Operations.GeneratePayment
+      InvoiceXpress.Operations.ListInvoices
+      InvoiceXpress.Operations.CreateGuide
+      InvoiceXpress.Operations.GetGuide
+      InvoiceXpress.Operations.ChangeGuideState
+      InvoiceXpress.Operations.CreateInvoice
+      InvoiceXpress.Operations.GetInvoice
+      InvoiceXpress.Operations.ChangeInvoiceState
+      InvoiceXpress.Operations.SendInvoiceEmail
+      InvoiceXpress.Types
+      InvoiceXpress.TypeAlias
+      InvoiceXpress.Types.Identifier149
+      InvoiceXpress.Types.SendEmail
+      InvoiceXpress.Types.Documents
+      InvoiceXpress.Types.CreateInvoice
+      InvoiceXpress.Types.ChangeState
+      InvoiceXpress.Types.CreateClients
+      InvoiceXpress.Types.CreateInvoice
+      InvoiceXpress.Types.SendEmail
+      InvoiceXpress.Types.ChangeStateGuideRequest
+      InvoiceXpress.Types.ChangeStateInvoiceRequest
+      InvoiceXpress.Types.ClientRequest
+      InvoiceXpress.Types.ClientsGetResponse
+      InvoiceXpress.Types.ClientsListAll
+      InvoiceXpress.Types.CreateBody
+      InvoiceXpress.Types.DocumentClientRequest
+      InvoiceXpress.Types.EmailDocumentRequest
+      InvoiceXpress.Types.FullDocumentObject
+      InvoiceXpress.Types.GlobalDiscountRequest
+      InvoiceXpress.Types.GuideCreateRequest
+      InvoiceXpress.Types.GuideGetResponse
+      InvoiceXpress.Types.InvoiceClient
+      InvoiceXpress.Types.InvoiceCreateRequest
+      InvoiceXpress.Types.InvoiceGetResponse
+      InvoiceXpress.Types.InvoiceItem
+      InvoiceXpress.Types.InvoiceItemRequest
+      InvoiceXpress.Types.InvoiceListAllResponse
+      InvoiceXpress.Types.InvoiceTaxRequest
+      InvoiceXpress.Types.MbReference
+      InvoiceXpress.Types.Pagination
+      InvoiceXpress.Types.PaymentRequest
+      InvoiceXpress.Types.PaymentResponse
+      InvoiceXpress.Types.PdfResponse
+      InvoiceXpress.Types.QueryParamns
+      InvoiceXpress.Configuration
+      InvoiceXpress.SecuritySchemes
+      InvoiceXpress.Common
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , text
+    , ghc-prim
+    , http-conduit
+    , http-client
+    , http-types
+    , bytestring
+    , aeson
+    , unordered-containers
+    , vector
+    , scientific
+    , time
+    , mtl
+    , transformers
+  default-language: Haskell2010

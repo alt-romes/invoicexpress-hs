@@ -1,0 +1,28 @@
+module InvoiceXpress.Types.EmailDocumentRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.Common
+data EmailDocumentRequest
+instance Show EmailDocumentRequest
+instance Eq EmailDocumentRequest
+instance Data.Aeson.FromJSON EmailDocumentRequest
+instance Data.Aeson.ToJSON EmailDocumentRequest
+data EmailDocumentRequestMessage
+instance Show EmailDocumentRequestMessage
+instance Eq EmailDocumentRequestMessage
+instance Data.Aeson.FromJSON EmailDocumentRequestMessage
+instance Data.Aeson.ToJSON EmailDocumentRequestMessage
+data EmailDocumentRequestMessageClient
+instance Show EmailDocumentRequestMessageClient
+instance Eq EmailDocumentRequestMessageClient
+instance Data.Aeson.FromJSON EmailDocumentRequestMessageClient
+instance Data.Aeson.ToJSON EmailDocumentRequestMessageClient
+data EmailDocumentRequestMessageClientSave
+instance Show EmailDocumentRequestMessageClientSave
+instance Eq EmailDocumentRequestMessageClientSave
+instance Data.Aeson.FromJSON EmailDocumentRequestMessageClientSave
+instance Data.Aeson.ToJSON EmailDocumentRequestMessageClientSave
+data EmailDocumentRequestMessageLogo
+instance Show EmailDocumentRequestMessageLogo
+instance Eq EmailDocumentRequestMessageLogo
+instance Data.Aeson.FromJSON EmailDocumentRequestMessageLogo
+instance Data.Aeson.ToJSON EmailDocumentRequestMessageLogo

@@ -1,0 +1,38 @@
+module InvoiceXpress.Types.GuideGetResponse where
+import qualified Data.Aeson
+import qualified InvoiceXpress.Common
+data GuideGetResponse
+instance Show GuideGetResponse
+instance Eq GuideGetResponse
+instance Data.Aeson.FromJSON GuideGetResponse
+instance Data.Aeson.ToJSON GuideGetResponse
+data GuideGetResponseShipping
+instance Show GuideGetResponseShipping
+instance Eq GuideGetResponseShipping
+instance Data.Aeson.FromJSON GuideGetResponseShipping
+instance Data.Aeson.ToJSON GuideGetResponseShipping
+data GuideGetResponseShippingAddressFrom
+instance Show GuideGetResponseShippingAddressFrom
+instance Eq GuideGetResponseShippingAddressFrom
+instance Data.Aeson.FromJSON GuideGetResponseShippingAddressFrom
+instance Data.Aeson.ToJSON GuideGetResponseShippingAddressFrom
+data GuideGetResponseShippingAddressTo
+instance Show GuideGetResponseShippingAddressTo
+instance Eq GuideGetResponseShippingAddressTo
+instance Data.Aeson.FromJSON GuideGetResponseShippingAddressTo
+instance Data.Aeson.ToJSON GuideGetResponseShippingAddressTo
+data GuideGetResponseShippingClient
+instance Show GuideGetResponseShippingClient
+instance Eq GuideGetResponseShippingClient
+instance Data.Aeson.FromJSON GuideGetResponseShippingClient
+instance Data.Aeson.ToJSON GuideGetResponseShippingClient
+data GuideGetResponseShippingItems
+instance Show GuideGetResponseShippingItems
+instance Eq GuideGetResponseShippingItems
+instance Data.Aeson.FromJSON GuideGetResponseShippingItems
+instance Data.Aeson.ToJSON GuideGetResponseShippingItems
+data GuideGetResponseShippingItemsTax
+instance Show GuideGetResponseShippingItemsTax
+instance Eq GuideGetResponseShippingItemsTax
+instance Data.Aeson.FromJSON GuideGetResponseShippingItemsTax
+instance Data.Aeson.ToJSON GuideGetResponseShippingItemsTax
