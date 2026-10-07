@@ -35,7 +35,9 @@ module InvoiceXpress
   ) where
 
 import Control.Exception (Exception, throwIO)
+import Control.Monad (unless)
 import Data.Text (Text, pack)
+import qualified Data.Text as T
 import Data.Time (Day, LocalTime, defaultTimeLocale, formatTime)
 import Network.HTTP.Client (Response, responseBody)
 import Numeric (showFFloat)
@@ -86,7 +88,7 @@ data Document = Document
 document :: DocumentType -> Client -> Day -> Day -> [Item] -> Document
 document ty c day due is = Document ty c day due is Nothing Nothing Nothing Nothing Nothing
 
--- | Clients are matched by code, or by name when there is no code, and created if they don't exist.
+-- | Clients are matched by code, then by name (also when the code is unknown), and created if neither matches.
 data Client = Client
   { clientName :: Text
   , clientCode :: Maybe Text
@@ -140,8 +142,29 @@ newtype InvoiceXpressError = InvoiceXpressError String
 instance Exception InvoiceXpressError
 
 -- | Create a document as a draft.
+--
+-- Fails before sending anything if a field exceeds InvoiceXpress' length limits.
 draft :: Account -> Document -> IO Stored
-draft acc doc = case kind doc of
+draft acc doc = do
+  unless (null (limits doc)) $ throwIO (InvoiceXpressError (unlines (limits doc)))
+  create acc doc
+
+-- | Field length limits, beyond which InvoiceXpress truncates or rejects values.
+limits :: Document -> [String]
+limits doc = concat $
+  [ tooLong "client name" 100 (clientName c)
+  , foldMap (tooLong "client email" 254) (clientEmail c)
+  , foldMap (tooLong "reference" 255) (reference doc)
+  ] ++
+  [ tooLong "item name" 60 (itemName i) ++ tooLong "item description" 200 (itemDescription i)
+      ++ [ "item description has more than 20 lines: " <> show (itemDescription i) | length (T.lines (itemDescription i)) > 20 ]
+  | i <- items doc ]
+  where
+    c = customer doc
+    tooLong what n t = [ what <> " longer than " <> show n <> " characters: " <> show t | T.length t > n ]
+
+create :: Account -> Document -> IO Stored
+create acc doc = case kind doc of
   Shipping from to loaded ->
     call acc (createGuide (mkCreateGuideParameters (CreateGuideParametersPathGuidesTypeTyped path) (apiKey acc))
                           (mkGuideCreateRequest (shipping from to loaded))) >>= \case
