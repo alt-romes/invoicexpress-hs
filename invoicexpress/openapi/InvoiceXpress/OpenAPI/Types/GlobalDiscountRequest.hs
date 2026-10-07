@@ -47,7 +47,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON GlobalDiscountRequest
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("value" Data.Aeson.Types.ToJSON..=)) (globalDiscountRequestValue obj) : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("value_type" Data.Aeson.Types.ToJSON..=)) (globalDiscountRequestValueType obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("value" Data.Aeson.Types.ToJSON..=)) (globalDiscountRequestValue obj) : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("value_type" Data.Aeson.Types.ToJSON..=)) (globalDiscountRequestValueType obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON GlobalDiscountRequest
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "GlobalDiscountRequest" (\obj -> (GHC.Base.pure GlobalDiscountRequest GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "value")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "value_type"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "GlobalDiscountRequest" (\obj -> (GHC.Base.pure GlobalDiscountRequest GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "value")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "value_type"))}
 -- | Create a new 'GlobalDiscountRequest' with all required fields.
 mkGlobalDiscountRequest :: GlobalDiscountRequest
 mkGlobalDiscountRequest = GlobalDiscountRequest{globalDiscountRequestValue = GHC.Maybe.Nothing,

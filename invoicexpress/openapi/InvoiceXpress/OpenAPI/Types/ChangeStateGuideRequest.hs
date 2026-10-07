@@ -64,7 +64,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON ChangeStateGuideRequestShipping
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("message" Data.Aeson.Types.ToJSON..=)) (changeStateGuideRequestShippingMessage obj) : ["state" Data.Aeson.Types.ToJSON..= changeStateGuideRequestShippingState obj] : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("message" Data.Aeson.Types.ToJSON..=)) (changeStateGuideRequestShippingMessage obj) : ["state" Data.Aeson.Types.ToJSON..= changeStateGuideRequestShippingState obj] : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON ChangeStateGuideRequestShipping
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeStateGuideRequestShipping" (\obj -> (GHC.Base.pure ChangeStateGuideRequestShipping GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "message")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..: "state"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeStateGuideRequestShipping" (\obj -> (GHC.Base.pure ChangeStateGuideRequestShipping GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "message")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..: "state"))}
 -- | Create a new 'ChangeStateGuideRequestShipping' with all required fields.
 mkChangeStateGuideRequestShipping :: ChangeStateGuideRequestShippingState -- ^ 'changeStateGuideRequestShippingState'
   -> ChangeStateGuideRequestShipping

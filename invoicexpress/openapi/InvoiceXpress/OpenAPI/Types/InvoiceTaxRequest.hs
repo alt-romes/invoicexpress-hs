@@ -49,7 +49,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON InvoiceTaxRequest
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("name" Data.Aeson.Types.ToJSON..=)) (invoiceTaxRequestName obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("name" Data.Aeson.Types.ToJSON..=)) (invoiceTaxRequestName obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON InvoiceTaxRequest
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "InvoiceTaxRequest" (\obj -> GHC.Base.pure InvoiceTaxRequest GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "name"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "InvoiceTaxRequest" (\obj -> GHC.Base.pure InvoiceTaxRequest GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "name"))}
 -- | Create a new 'InvoiceTaxRequest' with all required fields.
 mkInvoiceTaxRequest :: InvoiceTaxRequest
 mkInvoiceTaxRequest = InvoiceTaxRequest{invoiceTaxRequestName = GHC.Maybe.Nothing}

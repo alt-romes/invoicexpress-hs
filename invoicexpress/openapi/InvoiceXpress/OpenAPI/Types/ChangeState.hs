@@ -45,7 +45,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON ChangeState
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (changeStateErrors obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (changeStateErrors obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON ChangeState
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeState" (\obj -> GHC.Base.pure ChangeState GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeState" (\obj -> GHC.Base.pure ChangeState GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "errors"))}
 -- | Create a new 'ChangeState' with all required fields.
 mkChangeState :: ChangeState
 mkChangeState = ChangeState{changeStateErrors = GHC.Maybe.Nothing}
@@ -61,7 +61,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON ChangeStateErrors
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (changeStateErrorsError obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (changeStateErrorsError obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON ChangeStateErrors
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeStateErrors" (\obj -> GHC.Base.pure ChangeStateErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "error"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeStateErrors" (\obj -> GHC.Base.pure ChangeStateErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "error"))}
 -- | Create a new 'ChangeStateErrors' with all required fields.
 mkChangeStateErrors :: ChangeStateErrors
 mkChangeStateErrors = ChangeStateErrors{changeStateErrorsError = GHC.Maybe.Nothing}

@@ -45,7 +45,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON PdfResponse
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("output" Data.Aeson.Types.ToJSON..=)) (pdfResponseOutput obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("output" Data.Aeson.Types.ToJSON..=)) (pdfResponseOutput obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON PdfResponse
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "PdfResponse" (\obj -> GHC.Base.pure PdfResponse GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "output"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "PdfResponse" (\obj -> GHC.Base.pure PdfResponse GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "output"))}
 -- | Create a new 'PdfResponse' with all required fields.
 mkPdfResponse :: PdfResponse
 mkPdfResponse = PdfResponse{pdfResponseOutput = GHC.Maybe.Nothing}
@@ -61,7 +61,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON PdfResponseOutput
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("pdfUrl" Data.Aeson.Types.ToJSON..=)) (pdfResponseOutputPdfUrl obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("pdfUrl" Data.Aeson.Types.ToJSON..=)) (pdfResponseOutputPdfUrl obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON PdfResponseOutput
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "PdfResponseOutput" (\obj -> GHC.Base.pure PdfResponseOutput GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "pdfUrl"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "PdfResponseOutput" (\obj -> GHC.Base.pure PdfResponseOutput GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "pdfUrl"))}
 -- | Create a new 'PdfResponseOutput' with all required fields.
 mkPdfResponseOutput :: PdfResponseOutput
 mkPdfResponseOutput = PdfResponseOutput{pdfResponseOutputPdfUrl = GHC.Maybe.Nothing}

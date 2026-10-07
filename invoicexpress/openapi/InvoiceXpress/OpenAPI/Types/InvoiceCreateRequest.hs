@@ -48,7 +48,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON InvoiceCreateRequest
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (["invoice" Data.Aeson.Types.ToJSON..= invoiceCreateRequestInvoice obj] : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("proprietary_uid" Data.Aeson.Types.ToJSON..=)) (invoiceCreateRequestProprietaryUid obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (["invoice" Data.Aeson.Types.ToJSON..= invoiceCreateRequestInvoice obj] : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("proprietary_uid" Data.Aeson.Types.ToJSON..=)) (invoiceCreateRequestProprietaryUid obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON InvoiceCreateRequest
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "InvoiceCreateRequest" (\obj -> (GHC.Base.pure InvoiceCreateRequest GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..: "invoice")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "proprietary_uid"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "InvoiceCreateRequest" (\obj -> (GHC.Base.pure InvoiceCreateRequest GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..: "invoice")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "proprietary_uid"))}
 -- | Create a new 'InvoiceCreateRequest' with all required fields.
 mkInvoiceCreateRequest :: CreateBody -- ^ 'invoiceCreateRequestInvoice'
   -> InvoiceCreateRequest

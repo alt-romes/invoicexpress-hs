@@ -45,7 +45,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON CreateClients
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createClientsErrors obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createClientsErrors obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON CreateClients
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateClients" (\obj -> GHC.Base.pure CreateClients GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateClients" (\obj -> GHC.Base.pure CreateClients GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "errors"))}
 -- | Create a new 'CreateClients' with all required fields.
 mkCreateClients :: CreateClients
 mkCreateClients = CreateClients{createClientsErrors = GHC.Maybe.Nothing}

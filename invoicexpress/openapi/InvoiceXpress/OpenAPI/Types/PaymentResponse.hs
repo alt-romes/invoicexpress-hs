@@ -46,7 +46,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON PaymentResponse
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("receipt" Data.Aeson.Types.ToJSON..=)) (paymentResponseReceipt obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("receipt" Data.Aeson.Types.ToJSON..=)) (paymentResponseReceipt obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON PaymentResponse
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "PaymentResponse" (\obj -> GHC.Base.pure PaymentResponse GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "receipt"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "PaymentResponse" (\obj -> GHC.Base.pure PaymentResponse GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "receipt"))}
 -- | Create a new 'PaymentResponse' with all required fields.
 mkPaymentResponse :: PaymentResponse
 mkPaymentResponse = PaymentResponse{paymentResponseReceipt = GHC.Maybe.Nothing}

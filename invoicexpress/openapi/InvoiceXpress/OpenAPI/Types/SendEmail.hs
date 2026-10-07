@@ -45,7 +45,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON SendEmail
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (sendEmailErrors obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (sendEmailErrors obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON SendEmail
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "SendEmail" (\obj -> GHC.Base.pure SendEmail GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "SendEmail" (\obj -> GHC.Base.pure SendEmail GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "errors"))}
 -- | Create a new 'SendEmail' with all required fields.
 mkSendEmail :: SendEmail
 mkSendEmail = SendEmail{sendEmailErrors = GHC.Maybe.Nothing}
@@ -61,7 +61,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON SendEmailErrors
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (sendEmailErrorsError obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (sendEmailErrorsError obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON SendEmailErrors
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "SendEmailErrors" (\obj -> GHC.Base.pure SendEmailErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "error"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "SendEmailErrors" (\obj -> GHC.Base.pure SendEmailErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "error"))}
 -- | Create a new 'SendEmailErrors' with all required fields.
 mkSendEmailErrors :: SendEmailErrors
 mkSendEmailErrors = SendEmailErrors{sendEmailErrorsError = GHC.Maybe.Nothing}

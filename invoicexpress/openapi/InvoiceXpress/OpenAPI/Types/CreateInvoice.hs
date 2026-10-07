@@ -47,7 +47,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON CreateInvoice
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrors obj) : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("reason" Data.Aeson.Types.ToJSON..=)) (createInvoiceReason obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrors obj) : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("reason" Data.Aeson.Types.ToJSON..=)) (createInvoiceReason obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON CreateInvoice
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateInvoice" (\obj -> (GHC.Base.pure CreateInvoice GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "reason"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateInvoice" (\obj -> (GHC.Base.pure CreateInvoice GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "errors")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "reason"))}
 -- | Create a new 'CreateInvoice' with all required fields.
 mkCreateInvoice :: CreateInvoice
 mkCreateInvoice = CreateInvoice{createInvoiceErrors = GHC.Maybe.Nothing,
@@ -64,7 +64,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON CreateInvoiceErrors
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrorsError obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrorsError obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON CreateInvoiceErrors
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateInvoiceErrors" (\obj -> GHC.Base.pure CreateInvoiceErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "error"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateInvoiceErrors" (\obj -> GHC.Base.pure CreateInvoiceErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "error"))}
 -- | Create a new 'CreateInvoiceErrors' with all required fields.
 mkCreateInvoiceErrors :: CreateInvoiceErrors
 mkCreateInvoiceErrors = CreateInvoiceErrors{createInvoiceErrorsError = GHC.Maybe.Nothing}

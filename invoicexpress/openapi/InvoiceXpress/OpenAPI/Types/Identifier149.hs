@@ -45,7 +45,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON Identifier149
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (errors obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (errors obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON Identifier149
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "Identifier149" (\obj -> GHC.Base.pure Identifier149 GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "Identifier149" (\obj -> GHC.Base.pure Identifier149 GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "errors"))}
 -- | Create a new 'Identifier149' with all required fields.
 mkIdentifier149 :: Identifier149
 mkIdentifier149 = Identifier149{errors = GHC.Maybe.Nothing}
@@ -61,7 +61,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON Errors
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (errorsError obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (errorsError obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON Errors
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "Errors" (\obj -> GHC.Base.pure Errors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "error"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "Errors" (\obj -> GHC.Base.pure Errors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "error"))}
 -- | Create a new 'Errors' with all required fields.
 mkErrors :: Errors
 mkErrors = Errors{errorsError = GHC.Maybe.Nothing}

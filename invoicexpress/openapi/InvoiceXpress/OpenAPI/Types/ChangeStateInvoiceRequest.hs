@@ -64,7 +64,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON ChangeStateInvoiceRequestInvoice
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("message" Data.Aeson.Types.ToJSON..=)) (changeStateInvoiceRequestInvoiceMessage obj) : ["state" Data.Aeson.Types.ToJSON..= changeStateInvoiceRequestInvoiceState obj] : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("message" Data.Aeson.Types.ToJSON..=)) (changeStateInvoiceRequestInvoiceMessage obj) : ["state" Data.Aeson.Types.ToJSON..= changeStateInvoiceRequestInvoiceState obj] : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON ChangeStateInvoiceRequestInvoice
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeStateInvoiceRequestInvoice" (\obj -> (GHC.Base.pure ChangeStateInvoiceRequestInvoice GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "message")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..: "state"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "ChangeStateInvoiceRequestInvoice" (\obj -> (GHC.Base.pure ChangeStateInvoiceRequestInvoice GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "message")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..: "state"))}
 -- | Create a new 'ChangeStateInvoiceRequestInvoice' with all required fields.
 mkChangeStateInvoiceRequestInvoice :: ChangeStateInvoiceRequestInvoiceState -- ^ 'changeStateInvoiceRequestInvoiceState'
   -> ChangeStateInvoiceRequestInvoice

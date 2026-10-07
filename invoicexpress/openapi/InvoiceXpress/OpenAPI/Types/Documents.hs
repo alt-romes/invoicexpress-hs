@@ -45,7 +45,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON Documents
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (documentsErrors obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (documentsErrors obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON Documents
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "Documents" (\obj -> GHC.Base.pure Documents GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "Documents" (\obj -> GHC.Base.pure Documents GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "errors"))}
 -- | Create a new 'Documents' with all required fields.
 mkDocuments :: Documents
 mkDocuments = Documents{documentsErrors = GHC.Maybe.Nothing}
@@ -61,7 +61,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON DocumentsErrors
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (documentsErrorsError obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("error" Data.Aeson.Types.ToJSON..=)) (documentsErrorsError obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON DocumentsErrors
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "DocumentsErrors" (\obj -> GHC.Base.pure DocumentsErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "error"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "DocumentsErrors" (\obj -> GHC.Base.pure DocumentsErrors GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:? "error"))}
 -- | Create a new 'DocumentsErrors' with all required fields.
 mkDocumentsErrors :: DocumentsErrors
 mkDocumentsErrors = DocumentsErrors{documentsErrorsError = GHC.Maybe.Nothing}
