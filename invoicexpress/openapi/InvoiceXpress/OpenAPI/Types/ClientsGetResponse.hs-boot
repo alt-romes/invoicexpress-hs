@@ -1,0 +1,18 @@
+module InvoiceXpress.OpenAPI.Types.ClientsGetResponse where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data ClientsGetResponse
+instance Show ClientsGetResponse
+instance Eq ClientsGetResponse
+instance Data.Aeson.FromJSON ClientsGetResponse
+instance Data.Aeson.ToJSON ClientsGetResponse
+data ClientsGetResponseClient
+instance Show ClientsGetResponseClient
+instance Eq ClientsGetResponseClient
+instance Data.Aeson.FromJSON ClientsGetResponseClient
+instance Data.Aeson.ToJSON ClientsGetResponseClient
+data ClientsGetResponseClientPreferredContact
+instance Show ClientsGetResponseClientPreferredContact
+instance Eq ClientsGetResponseClientPreferredContact
+instance Data.Aeson.FromJSON ClientsGetResponseClientPreferredContact
+instance Data.Aeson.ToJSON ClientsGetResponseClientPreferredContact

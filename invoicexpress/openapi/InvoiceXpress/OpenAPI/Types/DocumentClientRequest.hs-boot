@@ -1,0 +1,8 @@
+module InvoiceXpress.OpenAPI.Types.DocumentClientRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data DocumentClientRequest
+instance Show DocumentClientRequest
+instance Eq DocumentClientRequest
+instance Data.Aeson.FromJSON DocumentClientRequest
+instance Data.Aeson.ToJSON DocumentClientRequest

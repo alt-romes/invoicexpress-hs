@@ -1,0 +1,38 @@
+module InvoiceXpress.OpenAPI.Types.GuideCreateRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data GuideCreateRequest
+instance Show GuideCreateRequest
+instance Eq GuideCreateRequest
+instance Data.Aeson.FromJSON GuideCreateRequest
+instance Data.Aeson.ToJSON GuideCreateRequest
+data GuideCreateRequestShipping
+instance Show GuideCreateRequestShipping
+instance Eq GuideCreateRequestShipping
+instance Data.Aeson.FromJSON GuideCreateRequestShipping
+instance Data.Aeson.ToJSON GuideCreateRequestShipping
+data GuideCreateRequestShippingAddressFrom
+instance Show GuideCreateRequestShippingAddressFrom
+instance Eq GuideCreateRequestShippingAddressFrom
+instance Data.Aeson.FromJSON GuideCreateRequestShippingAddressFrom
+instance Data.Aeson.ToJSON GuideCreateRequestShippingAddressFrom
+data GuideCreateRequestShippingAddressTo
+instance Show GuideCreateRequestShippingAddressTo
+instance Eq GuideCreateRequestShippingAddressTo
+instance Data.Aeson.FromJSON GuideCreateRequestShippingAddressTo
+instance Data.Aeson.ToJSON GuideCreateRequestShippingAddressTo
+data GuideCreateRequestShippingClient
+instance Show GuideCreateRequestShippingClient
+instance Eq GuideCreateRequestShippingClient
+instance Data.Aeson.FromJSON GuideCreateRequestShippingClient
+instance Data.Aeson.ToJSON GuideCreateRequestShippingClient
+data GuideCreateRequestShippingItems
+instance Show GuideCreateRequestShippingItems
+instance Eq GuideCreateRequestShippingItems
+instance Data.Aeson.FromJSON GuideCreateRequestShippingItems
+instance Data.Aeson.ToJSON GuideCreateRequestShippingItems
+data GuideCreateRequestShippingItemsTax
+instance Show GuideCreateRequestShippingItemsTax
+instance Eq GuideCreateRequestShippingItemsTax
+instance Data.Aeson.FromJSON GuideCreateRequestShippingItemsTax
+instance Data.Aeson.ToJSON GuideCreateRequestShippingItemsTax

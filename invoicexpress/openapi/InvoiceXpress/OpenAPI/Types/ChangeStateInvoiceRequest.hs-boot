@@ -1,0 +1,18 @@
+module InvoiceXpress.OpenAPI.Types.ChangeStateInvoiceRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data ChangeStateInvoiceRequest
+instance Show ChangeStateInvoiceRequest
+instance Eq ChangeStateInvoiceRequest
+instance Data.Aeson.FromJSON ChangeStateInvoiceRequest
+instance Data.Aeson.ToJSON ChangeStateInvoiceRequest
+data ChangeStateInvoiceRequestInvoice
+instance Show ChangeStateInvoiceRequestInvoice
+instance Eq ChangeStateInvoiceRequestInvoice
+instance Data.Aeson.FromJSON ChangeStateInvoiceRequestInvoice
+instance Data.Aeson.ToJSON ChangeStateInvoiceRequestInvoice
+data ChangeStateInvoiceRequestInvoiceState
+instance Show ChangeStateInvoiceRequestInvoiceState
+instance Eq ChangeStateInvoiceRequestInvoiceState
+instance Data.Aeson.FromJSON ChangeStateInvoiceRequestInvoiceState
+instance Data.Aeson.ToJSON ChangeStateInvoiceRequestInvoiceState

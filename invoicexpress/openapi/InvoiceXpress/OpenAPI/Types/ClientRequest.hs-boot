@@ -1,0 +1,28 @@
+module InvoiceXpress.OpenAPI.Types.ClientRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data ClientRequest
+instance Show ClientRequest
+instance Eq ClientRequest
+instance Data.Aeson.FromJSON ClientRequest
+instance Data.Aeson.ToJSON ClientRequest
+data ClientRequestClient
+instance Show ClientRequestClient
+instance Eq ClientRequestClient
+instance Data.Aeson.FromJSON ClientRequestClient
+instance Data.Aeson.ToJSON ClientRequestClient
+data ClientRequestClientLanguage
+instance Show ClientRequestClientLanguage
+instance Eq ClientRequestClientLanguage
+instance Data.Aeson.FromJSON ClientRequestClientLanguage
+instance Data.Aeson.ToJSON ClientRequestClientLanguage
+data ClientRequestClientPreferredContact
+instance Show ClientRequestClientPreferredContact
+instance Eq ClientRequestClientPreferredContact
+instance Data.Aeson.FromJSON ClientRequestClientPreferredContact
+instance Data.Aeson.ToJSON ClientRequestClientPreferredContact
+data ClientRequestClientSendOptions
+instance Show ClientRequestClientSendOptions
+instance Eq ClientRequestClientSendOptions
+instance Data.Aeson.FromJSON ClientRequestClientSendOptions
+instance Data.Aeson.ToJSON ClientRequestClientSendOptions

@@ -1,0 +1,18 @@
+module InvoiceXpress.OpenAPI.Types.ChangeStateGuideRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data ChangeStateGuideRequest
+instance Show ChangeStateGuideRequest
+instance Eq ChangeStateGuideRequest
+instance Data.Aeson.FromJSON ChangeStateGuideRequest
+instance Data.Aeson.ToJSON ChangeStateGuideRequest
+data ChangeStateGuideRequestShipping
+instance Show ChangeStateGuideRequestShipping
+instance Eq ChangeStateGuideRequestShipping
+instance Data.Aeson.FromJSON ChangeStateGuideRequestShipping
+instance Data.Aeson.ToJSON ChangeStateGuideRequestShipping
+data ChangeStateGuideRequestShippingState
+instance Show ChangeStateGuideRequestShippingState
+instance Eq ChangeStateGuideRequestShippingState
+instance Data.Aeson.FromJSON ChangeStateGuideRequestShippingState
+instance Data.Aeson.ToJSON ChangeStateGuideRequestShippingState

@@ -1,0 +1,18 @@
+module InvoiceXpress.OpenAPI.Types.PaymentRequest where
+import qualified Data.Aeson
+import qualified InvoiceXpress.OpenAPI.Common
+data PaymentRequest
+instance Show PaymentRequest
+instance Eq PaymentRequest
+instance Data.Aeson.FromJSON PaymentRequest
+instance Data.Aeson.ToJSON PaymentRequest
+data PaymentRequestPartialPayment
+instance Show PaymentRequestPartialPayment
+instance Eq PaymentRequestPartialPayment
+instance Data.Aeson.FromJSON PaymentRequestPartialPayment
+instance Data.Aeson.ToJSON PaymentRequestPartialPayment
+data PaymentRequestPartialPaymentPaymentMechanism
+instance Show PaymentRequestPartialPaymentPaymentMechanism
+instance Eq PaymentRequestPartialPaymentPaymentMechanism
+instance Data.Aeson.FromJSON PaymentRequestPartialPaymentPaymentMechanism
+instance Data.Aeson.ToJSON PaymentRequestPartialPaymentPaymentMechanism
