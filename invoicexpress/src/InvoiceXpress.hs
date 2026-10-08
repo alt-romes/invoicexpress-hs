@@ -1,4 +1,5 @@
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OrPatterns #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | A small, declarative interface to InvoiceXpress.
@@ -173,7 +174,7 @@ create acc doc = case kind doc of
       CreateGuideResponse201 GuideGetResponse {guideGetResponseShipping = Just s}
         | Just i <- guideGetResponseShippingId s -> pure (Stored (kind doc) i (guideGetResponseShippingPermalink s))
       other -> failure other
-  _ ->
+  (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
     call acc (createInvoice (mkCreateInvoiceParameters (CreateInvoiceParametersPathInvoicesTypeTyped path) (apiKey acc))
                             (mkInvoiceCreateRequest invoice)) >>= \case
       CreateInvoiceResponse201 InvoiceGetResponse {invoiceGetResponseInvoice = Just d}
@@ -235,7 +236,7 @@ finalize acc (Stored ty i _) = case ty of
       (mkChangeStateGuideRequest (mkChangeStateGuideRequestShipping ChangeStateGuideRequestShippingStateEnumFinalized))) >>= \case
       ChangeGuideStateResponse200 _ -> pure ()
       other -> failure other
-  _ ->
+  (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
     call acc (changeInvoiceState (mkChangeInvoiceStateParameters i (ChangeInvoiceStateParametersPathInvoicesTypeTyped (typePath ty)) (apiKey acc))
       (mkChangeStateInvoiceRequest (mkChangeStateInvoiceRequestInvoice ChangeStateInvoiceRequestInvoiceStateEnumFinalized))) >>= \case
       ChangeInvoiceStateResponse200 _ -> pure ()
