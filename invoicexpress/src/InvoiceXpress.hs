@@ -77,7 +77,6 @@ data Document = Document
   , items :: [Item]
   -- | Required when some item is 'Isento'.
   , taxExemption :: Maybe TaxExemption
-  , sequenceId :: Maybe Text
   -- | The invoice a credit or debit note refers to.
   , ownerInvoice :: Maybe Int
   , reference :: Maybe Text
@@ -87,7 +86,7 @@ data Document = Document
 
 -- | @document type client date dueDate items@, with the remaining fields empty.
 document :: DocumentType -> Client -> Day -> Day -> [Item] -> Document
-document ty c day due is = Document ty c day due is Nothing Nothing Nothing Nothing Nothing
+document ty c day due is = Document ty c day due is Nothing Nothing Nothing Nothing
 
 -- | Clients are matched by code, then by name (also when the code is unknown), and created if neither matches.
 -- Set 'clientId' (from the client's page URL in the web app) to avoid ambiguous matches.
@@ -185,7 +184,6 @@ create acc doc = case kind doc of
     c = customer doc
     invoice = (mkCreateBody docClient (formatDay (date doc)) (formatDay (dueDate doc)) (map invoiceItem (items doc)))
       { createBodyTaxExemption = showT <$> taxExemption doc
-      , createBodySequenceId = sequenceId doc
       , createBodyOwnerInvoiceId = ownerInvoice doc
       , createBodyReference = reference doc
       , createBodyObservations = observations doc
@@ -210,7 +208,6 @@ create acc doc = case kind doc of
         guideClient (formatDay (date doc)) (formatDay (dueDate doc)) (map guideItem (items doc))
         (pack (formatTime defaultTimeLocale "%d/%m/%Y %H:%M:%S" loaded)))
         { guideCreateRequestShippingTaxExemption = showT <$> taxExemption doc
-        , guideCreateRequestShippingSequenceId = sequenceId doc
         , guideCreateRequestShippingReference = reference doc
         , guideCreateRequestShippingObservations = observations doc
         }
