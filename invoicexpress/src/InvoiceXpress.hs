@@ -57,8 +57,8 @@ data DocumentType
   | SimplifiedInvoice
   | CreditNote
   | DebitNote
-  -- | Guia de remessa: from, to and when the goods were loaded.
-  | Shipping Address Address LocalTime
+  -- -- | Guia de remessa: from, to and when the goods were loaded.
+  -- | Shipping Address Address LocalTime
   deriving (Show, Eq)
 
 data Address = Address
@@ -167,12 +167,12 @@ limits doc = concat $
 
 create :: Account -> Document -> IO Stored
 create acc doc = case kind doc of
-  Shipping from to loaded ->
-    call acc (createGuide (mkCreateGuideParameters (CreateGuideParametersPathGuidesTypeTyped path) (apiKey acc))
-                          (mkGuideCreateRequest (shipping from to loaded))) >>= \case
-      CreateGuideResponse201 GuideGetResponse {guideGetResponseShipping = Just s}
-        | Just i <- guideGetResponseShippingId s -> pure (Stored (kind doc) i (guideGetResponseShippingPermalink s))
-      other -> failure other
+  -- Shipping from to loaded ->
+  --   call acc (createGuide (mkCreateGuideParameters (CreateGuideParametersPathGuidesTypeTyped path) (apiKey acc))
+  --                         (mkGuideCreateRequest (shipping from to loaded))) >>= \case
+  --     CreateGuideResponse201 GuideGetResponse {guideGetResponseShipping = Just s}
+  --       | Just i <- guideGetResponseShippingId s -> pure (Stored (kind doc) i (guideGetResponseShippingPermalink s))
+  --     other -> failure other
   (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
     call acc (createInvoice (mkCreateInvoiceParameters (CreateInvoiceParametersPathInvoicesTypeTyped path) (apiKey acc))
                             (mkInvoiceCreateRequest invoice)) >>= \case
@@ -201,38 +201,38 @@ create acc doc = case kind doc of
       }
     invoiceItem (Item n d q p t) = (mkInvoiceItemRequest d n q p)
       {invoiceItemRequestTax = Just mkInvoiceTaxRequest {invoiceTaxRequestName = Just (showT t)}}
-    shipping (Address fd fp fc fco) (Address td tp tc tco) loaded =
-      (mkGuideCreateRequestShipping
-        (mkGuideCreateRequestShippingAddressFrom fc fco fd fp)
-        (mkGuideCreateRequestShippingAddressTo tc tco td tp)
-        guideClient (formatDay (date doc)) (formatDay (dueDate doc)) (map guideItem (items doc))
-        (pack (formatTime defaultTimeLocale "%d/%m/%Y %H:%M:%S" loaded)))
-        { guideCreateRequestShippingTaxExemption = showT <$> taxExemption doc
-        , guideCreateRequestShippingReference = reference doc
-        , guideCreateRequestShippingObservations = observations doc
-        }
-    guideClient = mkGuideCreateRequestShippingClient
-      { guideCreateRequestShippingClientName = Just (clientName c)
-      , guideCreateRequestShippingClientId = clientId c
-      , guideCreateRequestShippingClientCode = clientCode c
-      , guideCreateRequestShippingClientFiscalId = clientFiscalId c
-      , guideCreateRequestShippingClientEmail = clientEmail c
-      , guideCreateRequestShippingClientAddress = clientAddress c
-      , guideCreateRequestShippingClientPostalCode = clientPostalCode c
-      , guideCreateRequestShippingClientCity = clientCity c
-      , guideCreateRequestShippingClientCountry = clientCountry c
-      }
-    guideItem (Item n d q p t) = (mkGuideCreateRequestShippingItems d n (decimal q) (decimal p))
-      {guideCreateRequestShippingItemsTax = Just mkGuideCreateRequestShippingItemsTax {guideCreateRequestShippingItemsTaxName = Just (showT t)}}
+    -- shipping (Address fd fp fc fco) (Address td tp tc tco) loaded =
+    --   (mkGuideCreateRequestShipping
+    --     (mkGuideCreateRequestShippingAddressFrom fc fco fd fp)
+    --     (mkGuideCreateRequestShippingAddressTo tc tco td tp)
+    --     guideClient (formatDay (date doc)) (formatDay (dueDate doc)) (map guideItem (items doc))
+    --     (pack (formatTime defaultTimeLocale "%d/%m/%Y %H:%M:%S" loaded)))
+    --     { guideCreateRequestShippingTaxExemption = showT <$> taxExemption doc
+    --     , guideCreateRequestShippingReference = reference doc
+    --     , guideCreateRequestShippingObservations = observations doc
+    --     }
+    -- guideClient = mkGuideCreateRequestShippingClient
+    --   { guideCreateRequestShippingClientName = Just (clientName c)
+    --   , guideCreateRequestShippingClientId = clientId c
+    --   , guideCreateRequestShippingClientCode = clientCode c
+    --   , guideCreateRequestShippingClientFiscalId = clientFiscalId c
+    --   , guideCreateRequestShippingClientEmail = clientEmail c
+    --   , guideCreateRequestShippingClientAddress = clientAddress c
+    --   , guideCreateRequestShippingClientPostalCode = clientPostalCode c
+    --   , guideCreateRequestShippingClientCity = clientCity c
+    --   , guideCreateRequestShippingClientCountry = clientCountry c
+    --   }
+    -- guideItem (Item n d q p t) = (mkGuideCreateRequestShippingItems d n (decimal q) (decimal p))
+    --   {guideCreateRequestShippingItemsTax = Just mkGuideCreateRequestShippingItemsTax {guideCreateRequestShippingItemsTaxName = Just (showT t)}}
 
 -- | Finalize a draft, assigning it its sequence number.
 finalize :: Account -> Stored -> IO ()
 finalize acc (Stored ty i _) = case ty of
-  Shipping {} ->
-    call acc (changeGuideState (mkChangeGuideStateParameters i (ChangeGuideStateParametersPathGuidesTypeTyped (typePath ty)) (apiKey acc))
-      (mkChangeStateGuideRequest (mkChangeStateGuideRequestShipping ChangeStateGuideRequestShippingStateEnumFinalized))) >>= \case
-      ChangeGuideStateResponse200 _ -> pure ()
-      other -> failure other
+  -- Shipping {} ->
+  --   call acc (changeGuideState (mkChangeGuideStateParameters i (ChangeGuideStateParametersPathGuidesTypeTyped (typePath ty)) (apiKey acc))
+  --     (mkChangeStateGuideRequest (mkChangeStateGuideRequestShipping ChangeStateGuideRequestShippingStateEnumFinalized))) >>= \case
+  --     ChangeGuideStateResponse200 _ -> pure ()
+  --     other -> failure other
   (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
     call acc (changeInvoiceState (mkChangeInvoiceStateParameters i (ChangeInvoiceStateParametersPathInvoicesTypeTyped (typePath ty)) (apiKey acc))
       (mkChangeStateInvoiceRequest (mkChangeStateInvoiceRequestInvoice ChangeStateInvoiceRequestInvoiceStateEnumFinalized))) >>= \case
@@ -260,7 +260,7 @@ typePath = \case
   SimplifiedInvoice -> "simplified_invoices"
   CreditNote -> "credit_notes"
   DebitNote -> "debit_notes"
-  Shipping {} -> "shippings"
+  -- Shipping {} -> "shippings"
 
 call :: Account -> ClientM (Response a) -> IO a
 call acc = fmap responseBody . runWithConfiguration config
