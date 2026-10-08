@@ -239,12 +239,13 @@ finalize acc (Stored ty i _) = case ty of
       ChangeInvoiceStateResponse200 _ -> pure ()
       other -> failure other
 
--- | Create and finalize a document.
-issue :: Account -> Document -> IO Stored
-issue acc doc = do
-  s <- draft acc doc
-  finalize acc s
-  pure s
+-- dangerous
+-- -- | Create and finalize a document.
+-- issue :: Account -> Document -> IO Stored
+-- issue acc doc = do
+--   s <- draft acc doc
+--   finalize acc s
+--   pure s
 
 -- | The URL of the document's PDF, or 'Nothing' if it is still being generated.
 pdfUrl :: Account -> Stored -> IO (Maybe Text)
