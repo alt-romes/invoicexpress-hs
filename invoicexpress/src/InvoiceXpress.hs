@@ -89,8 +89,10 @@ document :: DocumentType -> Client -> Day -> Day -> [Item] -> Document
 document ty c day due is = Document ty c day due is Nothing Nothing Nothing Nothing Nothing
 
 -- | Clients are matched by code, then by name (also when the code is unknown), and created if neither matches.
+-- Set 'clientId' (from the client's page URL in the web app) to avoid ambiguous matches.
 data Client = Client
   { clientName :: Text
+  , clientId :: Maybe Int
   , clientCode :: Maybe Text
   , clientFiscalId :: Maybe Text
   , clientEmail :: Maybe Text
@@ -102,7 +104,7 @@ data Client = Client
   deriving (Show, Eq)
 
 client :: Text -> Client
-client name = Client name Nothing Nothing Nothing Nothing Nothing Nothing Nothing
+client name = Client name Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing
 
 data Item = Item
   { itemName :: Text
@@ -189,6 +191,7 @@ create acc doc = case kind doc of
       }
     docClient = mkDocumentClientRequest
       { documentClientRequestName = Just (clientName c)
+      , documentClientRequestId = clientId c
       , documentClientRequestCode = clientCode c
       , documentClientRequestFiscalId = clientFiscalId c
       , documentClientRequestEmail = clientEmail c
@@ -212,6 +215,7 @@ create acc doc = case kind doc of
         }
     guideClient = mkGuideCreateRequestShippingClient
       { guideCreateRequestShippingClientName = Just (clientName c)
+      , guideCreateRequestShippingClientId = clientId c
       , guideCreateRequestShippingClientCode = clientCode c
       , guideCreateRequestShippingClientFiscalId = clientFiscalId c
       , guideCreateRequestShippingClientEmail = clientEmail c
