@@ -1,5 +1,8 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE LambdaCase #-}
+#if __GLASGOW_HASKELL__ >= 912
 {-# LANGUAGE OrPatterns #-}
+#endif
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | A small, declarative interface to InvoiceXpress.
@@ -173,7 +176,11 @@ create acc doc = case kind doc of
   --     CreateGuideResponse201 GuideGetResponse {guideGetResponseShipping = Just s}
   --       | Just i <- guideGetResponseShippingId s -> pure (Stored (kind doc) i (guideGetResponseShippingPermalink s))
   --     other -> failure other
+#if __GLASGOW_HASKELL__ >= 912
   (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
+#else
+  _ ->
+#endif
     call acc (createInvoice (mkCreateInvoiceParameters (CreateInvoiceParametersPathInvoicesTypeTyped path) (apiKey acc))
                             (mkInvoiceCreateRequest invoice)) >>= \case
       CreateInvoiceResponse201 InvoiceGetResponse {invoiceGetResponseInvoice = Just d}
@@ -240,7 +247,11 @@ changeState acc (Stored ty i _) st = case ty of
   --     (mkChangeStateGuideRequest (mkChangeStateGuideRequestShipping ChangeStateGuideRequestShippingStateEnumFinalized))) >>= \case
   --     ChangeGuideStateResponse200 _ -> pure ()
   --     other -> failure other
+#if __GLASGOW_HASKELL__ >= 912
   (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
+#else
+  _ ->
+#endif
     call acc (changeInvoiceState (mkChangeInvoiceStateParameters i (ChangeInvoiceStateParametersPathInvoicesTypeTyped (typePath ty)) (apiKey acc))
       (mkChangeStateInvoiceRequest (mkChangeStateInvoiceRequestInvoice st))) >>= \case
       ChangeInvoiceStateResponse200 _ -> pure ()
