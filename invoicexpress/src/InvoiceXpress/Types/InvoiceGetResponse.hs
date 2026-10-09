@@ -46,7 +46,7 @@ instance Data.Aeson.Types.ToJSON.ToJSON InvoiceGetResponse
     where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("invoice" Data.Aeson.Types.ToJSON..=)) (invoiceGetResponseInvoice obj) : GHC.Base.mempty));
            toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("invoice" Data.Aeson.Types.ToJSON..=)) (invoiceGetResponseInvoice obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON InvoiceGetResponse
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "InvoiceGetResponse" (\obj -> GHC.Base.pure InvoiceGetResponse GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "invoice"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "InvoiceGetResponse" (\obj -> GHC.Base.pure InvoiceGetResponse GHC.Base.<*> (GHC.Base.fmap Data.Foldable.asum (GHC.Base.mapM (obj Data.Aeson.Types.FromJSON..:!) ["invoice", "invoice_receipt", "simplified_invoice", "credit_note", "debit_note"])))}
 -- | Create a new 'InvoiceGetResponse' with all required fields.
 mkInvoiceGetResponse :: InvoiceGetResponse
 mkInvoiceGetResponse = InvoiceGetResponse{invoiceGetResponseInvoice = GHC.Maybe.Nothing}

@@ -30,8 +30,6 @@ library
       InvoiceXpress.Types.CreateInvoice
       InvoiceXpress.Types.ChangeState
       InvoiceXpress.Types.CreateClients
-      InvoiceXpress.Types.CreateInvoice
-      InvoiceXpress.Types.SendEmail
       InvoiceXpress.Types.ChangeStateGuideRequest
       InvoiceXpress.Types.ChangeStateInvoiceRequest
       InvoiceXpress.Types.ClientRequest

@@ -9,8 +9,6 @@ module InvoiceXpress.Types (
   module InvoiceXpress.Types.CreateInvoice,
   module InvoiceXpress.Types.ChangeState,
   module InvoiceXpress.Types.CreateClients,
-  module InvoiceXpress.Types.CreateInvoice,
-  module InvoiceXpress.Types.SendEmail,
   module InvoiceXpress.Types.ChangeStateGuideRequest,
   module InvoiceXpress.Types.ChangeStateInvoiceRequest,
   module InvoiceXpress.Types.ClientRequest,

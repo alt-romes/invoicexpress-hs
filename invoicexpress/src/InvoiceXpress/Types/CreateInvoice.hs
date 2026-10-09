@@ -33,22 +33,25 @@ import qualified GHC.Types
 import qualified InvoiceXpress.Common
 import InvoiceXpress.TypeAlias
 
--- | Defines the object schema located at @components.schemas.422CreateInvoice@ in the specification.
+-- | Defines the object schemas located at @components.schemas.409CreateInvoice@ and @components.schemas.422CreateInvoice@ in the specification.
 -- 
 -- 
 data CreateInvoice = CreateInvoice {
   -- | errors
   createInvoiceErrors :: (GHC.Maybe.Maybe CreateInvoiceErrors)
+  -- | reason
+  , createInvoiceReason :: (GHC.Maybe.Maybe Data.Text.Internal.Text)
   } deriving (GHC.Show.Show
   , GHC.Classes.Eq)
 instance Data.Aeson.Types.ToJSON.ToJSON CreateInvoice
-    where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrors obj) : GHC.Base.mempty));
-           toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrors obj) : GHC.Base.mempty)))}
+    where {toJSON obj = Data.Aeson.Types.Internal.object (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrors obj) : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("reason" Data.Aeson.Types.ToJSON..=)) (createInvoiceReason obj) : GHC.Base.mempty));
+           toEncoding obj = Data.Aeson.Encoding.Internal.pairs (GHC.Base.mconcat (Data.Foldable.concat (Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("errors" Data.Aeson.Types.ToJSON..=)) (createInvoiceErrors obj) : Data.Maybe.maybe GHC.Base.mempty (GHC.Base.pure GHC.Base.. ("reason" Data.Aeson.Types.ToJSON..=)) (createInvoiceReason obj) : GHC.Base.mempty)))}
 instance Data.Aeson.Types.FromJSON.FromJSON CreateInvoice
-    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateInvoice" (\obj -> GHC.Base.pure CreateInvoice GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors"))}
+    where {parseJSON = Data.Aeson.Types.FromJSON.withObject "CreateInvoice" (\obj -> (GHC.Base.pure CreateInvoice GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "errors")) GHC.Base.<*> (obj Data.Aeson.Types.FromJSON..:! "reason"))}
 -- | Create a new 'CreateInvoice' with all required fields.
 mkCreateInvoice :: CreateInvoice
-mkCreateInvoice = CreateInvoice{createInvoiceErrors = GHC.Maybe.Nothing}
+mkCreateInvoice = CreateInvoice{createInvoiceErrors = GHC.Maybe.Nothing,
+                                createInvoiceReason = GHC.Maybe.Nothing}
 -- | Defines the object schema located at @components.schemas.422CreateInvoice.properties.errors@ in the specification.
 -- 
 -- 

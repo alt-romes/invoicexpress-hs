@@ -17,6 +17,7 @@ module InvoiceXpress.Common
     textToByte,
     byteToText,
     stringifyModel,
+    documentBody,
     anonymousSecurityScheme,
     jsonObjectToList,
     Configuration (..),
@@ -343,6 +344,15 @@ jsonToFormDataPrefixed prefix (Aeson.Array vector) =
 -- | This function makes the code generation for URL parameters easier as it allows to stringify a value
 --
 -- The 'Show' class is not sufficient as strings should not be stringified with quotes.
+-- | Invoice documents are wrapped in the singular of their type (e.g. @credit_note@),
+-- not always in @invoice@ as the specification says.
+documentBody :: (Aeson.ToJSON ty, Aeson.ToJSON body) => ty -> body -> Aeson.Value
+documentBody ty body = case Aeson.toJSON body of
+  Aeson.Object o
+    | Just doc <- KeyMap.lookup "invoice" o ->
+        Aeson.Object (KeyMap.insert (Key.fromText (T.dropEnd 1 (stringifyModel ty))) doc (KeyMap.delete "invoice" o))
+  v -> v
+
 stringifyModel :: (Aeson.ToJSON a) => a -> Text
 stringifyModel x = case Aeson.toJSON x of
   Aeson.String s -> s
