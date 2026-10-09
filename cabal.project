@@ -1,6 +1,0 @@
-packages: invoicexpress
-
--- serialise and cborg (via tls) have not caught up with GHC 9.14 yet
-allow-newer: serialise:*, cborg:*
-max-backjumps: -1
-reorder-goals: True
