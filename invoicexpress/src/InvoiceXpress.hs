@@ -29,7 +29,7 @@ module InvoiceXpress
   , Stored (..)
   , draft
   , finalize
-  , issue
+  , deleteDraft
   , pdfUrl
     -- * Errors
   , InvoiceXpressError (..)
@@ -227,7 +227,14 @@ create acc doc = case kind doc of
 
 -- | Finalize a draft, assigning it its sequence number.
 finalize :: Account -> Stored -> IO ()
-finalize acc (Stored ty i _) = case ty of
+finalize acc s = changeState acc s ChangeStateInvoiceRequestInvoiceStateEnumFinalized
+
+-- | Delete a draft.
+deleteDraft :: Account -> Stored -> IO ()
+deleteDraft acc s = changeState acc s ChangeStateInvoiceRequestInvoiceStateEnumDeleted
+
+changeState :: Account -> Stored -> ChangeStateInvoiceRequestInvoiceState -> IO ()
+changeState acc (Stored ty i _) st = case ty of
   -- Shipping {} ->
   --   call acc (changeGuideState (mkChangeGuideStateParameters i (ChangeGuideStateParametersPathGuidesTypeTyped (typePath ty)) (apiKey acc))
   --     (mkChangeStateGuideRequest (mkChangeStateGuideRequestShipping ChangeStateGuideRequestShippingStateEnumFinalized))) >>= \case
@@ -235,7 +242,7 @@ finalize acc (Stored ty i _) = case ty of
   --     other -> failure other
   (Invoice; InvoiceReceipt; SimplifiedInvoice; CreditNote; DebitNote) ->
     call acc (changeInvoiceState (mkChangeInvoiceStateParameters i (ChangeInvoiceStateParametersPathInvoicesTypeTyped (typePath ty)) (apiKey acc))
-      (mkChangeStateInvoiceRequest (mkChangeStateInvoiceRequestInvoice ChangeStateInvoiceRequestInvoiceStateEnumFinalized))) >>= \case
+      (mkChangeStateInvoiceRequest (mkChangeStateInvoiceRequestInvoice st))) >>= \case
       ChangeInvoiceStateResponse200 _ -> pure ()
       other -> failure other
 
